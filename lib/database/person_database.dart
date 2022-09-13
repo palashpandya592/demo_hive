@@ -20,6 +20,6 @@ class Person {
 
   @override
   String toString() {
-    return '$name: $age';
+    return '$name, $age, ${friends.toString()}';
   }
 }

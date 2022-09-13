@@ -16,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Hive Demp',
+          'Hive Demo',
           style: TextStyle(
               fontWeight: FontWeight.w600, color: Colors.white, fontSize: 12),
         ),
@@ -54,9 +54,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 myHomePageController.displayValue();
               },
                 child: Container(
-              height: 15,
-              width: 15,
-              color: Colors.green,
+              height: 30,
+              width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.green,
+                  ),
             )),
           )
         ],

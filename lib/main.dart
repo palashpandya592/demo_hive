@@ -1,14 +1,16 @@
 import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_demo/myHomePage/internet_connection.dart';
 import 'package:hive_demo/myHomePage/myHomePage.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'database/person_database.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
 
+  InternetConnection internetConnection = InternetConnection();
+  WidgetsFlutterBinding.ensureInitialized();
+  internetConnection.checkInternetConnection();
   Directory? dir = await getExternalStorageDirectory();
   Hive..init(dir!.path)
   ..registerAdapter(PersonAdapter());
