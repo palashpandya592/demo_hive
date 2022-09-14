@@ -4,12 +4,12 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-class InternetConnection with ChangeNotifier{
+class InternetConnection with ChangeNotifier {
   // static ConnectivityResult connectionStatus = ConnectivityResult.none;
   static final Connectivity connectivity = Connectivity();
   static late StreamSubscription<ConnectivityResult> connectivitySubscription;
   static late InternetConnectionChecker  internetConnectivitySubscription;
-  bool isDeviceConnected = false;
+  bool isDeviceConnected = true;
 
    void checkInternetConnection() {
     initConnectivity();
@@ -27,7 +27,7 @@ class InternetConnection with ChangeNotifier{
     return _updateConnectionStatus(result);
   }
 
-   Future _updateConnectionStatus(
+   Future<void> _updateConnectionStatus(
       ConnectivityResult? result) async {
      isDeviceConnected = await InternetConnectionChecker().hasConnection;
 
