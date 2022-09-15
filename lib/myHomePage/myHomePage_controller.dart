@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_demo/database/user_database/userData.dart';
-import 'package:hive_demo/myHomePage/internet_connection.dart';
+import 'package:hive_demo/dependancy_injection/define_controller.dart';
+import 'package:hive_demo/controller_files/internet_connection.dart';
 import 'package:hive_demo/services/user_service.dart';
-import '../database/person_database.dart';
+import 'package:hive_demo/utils/hive_key.dart';
 
 class MyHomePageController with ChangeNotifier {
 
-  InternetConnection internetConnection = InternetConnection();
-
+ //define object of InternetConnection using getIt
+ InternetConnection internet = getIt<InternetConnection>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
@@ -17,36 +18,29 @@ class MyHomePageController with ChangeNotifier {
 
   UserService userService = UserService();
 
-  displayValue() async {
-    var box = await Hive.openBox('testBox');
-    var person = Person(age: ageController.text.trim(),
-        name: nameController.text.trim(),
-        friends: ['manish', 'jayesh']);
-    var boxX = await Hive.openBox('testBox12');
+  displayValue(context) async {
+    var boxX = await Hive.openBox(HiveKey.userDataBox);
 
-    // we can check condition here that internet is available or not
-    if(internetConnection.isDeviceConnected == true){
-      print('apiCallingFun ===> ${internetConnection.isDeviceConnected}');
+    // check condition here that internet is available or not
+    if(internet.isDeviceConnected == true){
       apiCallingFun();
-    } else{
-      userList = boxX.get('userData');
+    }
+    else{
+      userList = boxX.get(HiveKey.modelOfUserData);
       notifyListeners();
     }
   }
 
   apiCallingFun()async{
-    var box = await Hive.openBox('testBox12');
+    var box = await Hive.openBox(HiveKey.userDataBox);
     userService.getData().then((value){
       if(value != null){
         userData = value;
         userList = value.data!;
-        box.put('userData',value.data);
-        print('userData =====> ${userData.data!.first.firstName}');
+        box.put(HiveKey.modelOfUserData,value.data);
       }
       notifyListeners();
-
     });
   }
-
 }
 
