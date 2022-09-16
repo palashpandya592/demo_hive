@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_demo/database/user_database/userData.dart';
+import 'package:hive_demo/controller/internet_connection.dart';
+import 'package:hive_demo/database/coin_database/allcoin_list_model.dart';
+import 'package:hive_demo/database/coin_database/coin_image_model.dart';
 import 'package:hive_demo/dependancy_injection/define_controller.dart';
-import 'package:hive_demo/controller_files/internet_connection.dart';
-import 'package:hive_demo/myHomePage/myHomePage.dart';
-import 'package:hive_demo/myHomePage/myHomePage_controller.dart';
+import 'package:hive_demo/myHomePage/myhomepage.dart';
+import 'package:hive_demo/myhomepage/homepage_controller.dart';
 import 'package:hive_demo/utils/app_string.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'database/person_database/person_database.dart';
 
 void main() async {
   defineValue();
@@ -20,10 +20,8 @@ void main() async {
   Directory? dir = await getExternalStorageDirectory();
   Hive
     ..init(dir!.path)
-    ..registerAdapter(PersonAdapter())
-    ..registerAdapter(DatumAdapter())
-    ..registerAdapter(SupportAdapter())
-    ..registerAdapter(UserDataAdapter());
+    ..registerAdapter(AllCoinListModelAdapter())
+    ..registerAdapter(CoinImageModelAdapter());
 
 
   runApp(

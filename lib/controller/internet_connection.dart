@@ -22,7 +22,7 @@ class InternetConnection with ChangeNotifier {
     try {
       result = await connectivity.checkConnectivity();
     } on PlatformException catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
     return _updateConnectionStatus(result);
   }
@@ -32,7 +32,7 @@ class InternetConnection with ChangeNotifier {
 
      isDeviceConnected = await InternetConnectionChecker().hasConnection;
 
-    print('result ===> $result');
+     debugPrint('result ===> $result');
     notifyListeners();
   }
 
@@ -41,10 +41,10 @@ class InternetConnection with ChangeNotifier {
         (InternetConnectionStatus status) async{
       switch (status) {
         case InternetConnectionStatus.connected:
-          print(AppString.isAvailableData);
+          debugPrint(AppString.isAvailableData);
           break;
         case InternetConnectionStatus.disconnected:
-          print(AppString.disconnectedData);
+          debugPrint(AppString.disconnectedData);
           break;
       }
     },

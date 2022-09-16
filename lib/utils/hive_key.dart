@@ -1,6 +1,6 @@
 
 
 class HiveKey {
-  static const String userDataBox = "userDataList";
-  static const String modelOfUserData = "userData";
+  static const String modelOfCoinList = "coin List model";
+  static const String coinListKey = "coin List Key";
 }

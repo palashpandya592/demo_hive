@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive_demo/utils/app_string.dart';
 import 'package:hive_demo/utils/common_color.dart';
 
 class CommonTextStyle {
